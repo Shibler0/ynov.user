@@ -1,26 +1,33 @@
 import './App.css'
-import {useState} from "react";
-import HelloWorld from "./components/HelloWorld.tsx";
+import recipeData from "./assets/recipes.json";
+import {Link} from "react-router-dom";
+
+type RecipeThumbnail = {
+    id : number;
+    name: string;
+    prepTimeMinutes: number;
+    image: string;
+};
 
 function App() {
-  const [counter, setCounter] = useState<number>(0);
-  return(
-      <>
-          <section id="id-center">
-              <div>
-                  {counter > 3 ?
-                      <div>Important things</div>
-                      :
-                      <div>Some things</div>}
-              </div>
+    const recipes: RecipeThumbnail[] = recipeData.recipes;
 
-              <HelloWorld name={counter.toString()}/>
-              <button onClick={() => setCounter(counter + 1)}>Count ++</button>
-              <button onClick={() => setCounter(counter - 1)}>Count --</button>
-
-          </section>
-      </>
-  )
+    return (
+        <>
+            <h1>Risch Martin</h1>
+            <div className="recipes-grid">
+                {recipes.map((recipe) => (
+                    <Link to={`/recipedetails/${recipe.id}`}>
+                        <div className="recipe-card">
+                            <h2>{recipe.name}</h2>
+                            <p>Temps de préparation : {recipe.prepTimeMinutes} min</p>
+                            <img src={recipe.image} alt={recipe.name} />
+                        </div>
+                    </Link>
+                ))}
+            </div>
+        </>
+    )
 }
 
 export default App
