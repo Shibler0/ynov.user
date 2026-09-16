@@ -30,21 +30,27 @@ function RecipeDetails() {
 
             <h1>{recipe.name}</h1>
 
-            <img
-                className="recipe-image"
-                src={recipe.image}
-                alt={recipe.name}
-            />
+            <div className="recipe-top">
+                <img
+                    className="recipe-image"
+                    src={recipe.image}
+                    alt={recipe.name}
+                />
 
-            <h2>Ingrédients</h2>
-            <ul>
-                {recipe.ingredients.map((ingredient) => (
-                    <li key={ingredient}>{ingredient}</li>
-                ))}
-            </ul>
+                <div>
+                    <h2>Ingrédients</h2>
+
+                    <ul className="ingredients-list">
+                        {recipe.ingredients.map((ingredient) => (
+                            <li key={ingredient}>{ingredient}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
 
             <h2>Étapes</h2>
-            <ol>
+
+            <ol className="instructions-list">
                 {recipe.instructions.map((instruction) => (
                     <li key={instruction}>{instruction}</li>
                 ))}

@@ -1,0 +1,17 @@
+.Header ul {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+    list-style: none;
+    padding: 0;
+}
+
+.Header a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.Header a:hover {
+    color: violet;
+}

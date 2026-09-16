@@ -1,6 +1,7 @@
 import { useState } from "react";
 import userData from "../assets/users.json";
 import { useNavigate } from "react-router-dom";
+import '../Connection.css'
 
 function Connection() {
     const [email, setEmail] = useState("");
@@ -8,36 +9,41 @@ function Connection() {
     const navigate = useNavigate();
 
     return (
-        <>
-            <input
-                type="text"
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-            />
+        <div className="login-container">
+            <div className="login-card">
+                <h1>Connexion</h1>
 
-            <input
-                type="password"
-                placeholder="Mot de passe"
-                onChange={(e) => setPassword(e.target.value)}
-            />
+                <input
+                    type="text"
+                    placeholder="Email"
+                    onChange={(e) => setEmail(e.target.value)}
+                />
 
-            <button
-                onClick={() => {
-                    const user = userData.users.find(
-                        (user) =>
-                            user.email === email &&
-                            user.password === password
-                    );
+                <input
+                    type="password"
+                    placeholder="Mot de passe"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
 
-                    if (user) {
-                        navigate(`/userprofile/${user.id}`);
-                    } else {
-                        alert("Utilisateur introuvable");
-                    }
-                }}
-            >
-            </button>
-        </>
+                <button
+                    onClick={() => {
+                        const user = userData.users.find(
+                            (user) =>
+                                user.email === email &&
+                                user.password === password
+                        );
+
+                        if (user) {
+                            navigate(`/userprofile/${user.id}`);
+                        } else {
+                            alert("Utilisateur introuvable");
+                        }
+                    }}
+                >
+                    Se connecter
+                </button>
+            </div>
+        </div>
     );
 }
 

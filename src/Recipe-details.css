@@ -5,3 +5,30 @@
     max-width: 100%;
     border-radius: 20px;
 }
+
+.recipe-top {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.recipe-image {
+    width: 500px;
+    max-width: 50%;
+    border-radius: 20px;
+}
+
+.ingredients-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    list-style: none;
+    padding: 0;
+}
+
+.instructions-list {
+    list-style: none;
+    padding: 0;
+}
