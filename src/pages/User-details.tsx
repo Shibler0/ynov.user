@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import userData from "../assets/users.json";
+import { Navigate } from "react-router-dom";
 
 type RestrainedUser = {
     id: number,
@@ -16,7 +17,7 @@ function UserDetails() {
     );
 
     if (!user) {
-        return <p>Utilisateur introuvable</p>;
+        return <Navigate to="/*" />;
     }
 
     return (

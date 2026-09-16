@@ -9,6 +9,9 @@ import {Outlet} from "react-router";
 import App from "./App.tsx";
 import RecipeDetails from "./pages/Recipe-details.tsx";
 import UserDetails from "./pages/User-details.tsx";
+import Connection from "./pages/Connection.tsx";
+import UserProfile from "./pages/userprofile.tsx";
+import NotFound from "./pages/NotFound.tsx";
 
 const Layout = () => (
     <>
@@ -40,6 +43,18 @@ const router = createBrowserRouter([
             {
                 path: "/userdetails/:id",
                 element:<UserDetails/>
+            },
+            {
+                path: "/connection",
+                element:<Connection/>
+            },
+            {
+                path: "/userprofile/:id",
+                element:<UserProfile/>
+            },
+            {
+                path: "*",
+                element: <NotFound/>
             }
         ]
     }
