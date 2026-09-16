@@ -1,6 +1,7 @@
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import recipeData from "../assets/recipes.json";
 import '../Recipe-details.css';
+import BackButton from "../components/BackButton";
 
 type Recipe = {
     id: number;
@@ -12,7 +13,6 @@ type Recipe = {
 
 function RecipeDetails() {
     const { id } = useParams();
-    const navigate = useNavigate();
 
     const recipeId = Number(id);
 
@@ -26,9 +26,7 @@ function RecipeDetails() {
 
     return (
         <>
-            <button className="back-button" onClick={() => navigate(-1)}>
-                ⬅️
-            </button>
+            <BackButton text="Retour" />
 
             <h1>{recipe.name}</h1>
 
