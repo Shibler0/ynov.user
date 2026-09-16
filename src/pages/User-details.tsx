@@ -12,8 +12,10 @@ function UserDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const userId = Number(id);
+
     const user = userData.users.find(
-        (u: RestrainedUser) => u.id === Number(id)
+        (user: RestrainedUser) => user.id === userId
     );
 
     if (!user) {

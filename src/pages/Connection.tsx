@@ -27,11 +27,12 @@ function Connection() {
 
                 <button
                     onClick={() => {
-                        const user = userData.users.find(
-                            (user) =>
-                                user.email === email &&
-                                user.password === password
-                        );
+                        const user = userData.users.find((user) => {
+                            const sameEmail = user.email === email;
+                            const samePassword = user.password === password;
+
+                            return sameEmail && samePassword;
+                        });
 
                         if (user) {
                             navigate(`/userprofile/${user.id}`);

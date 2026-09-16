@@ -14,8 +14,10 @@ function RecipeDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const recipe: Recipe | undefined = recipeData.recipes.find(
-        (r: Recipe) => r.id === Number(id)
+    const recipeId = Number(id);
+
+    const recipe = recipeData.recipes.find(
+        (recipe: Recipe) => recipe.id === recipeId
     );
 
     if (!recipe) {
@@ -42,7 +44,7 @@ function RecipeDetails() {
 
                     <ul className="ingredients-list">
                         {recipe.ingredients.map((ingredient) => (
-                            <li key={ingredient}>{ingredient}</li>
+                            <li>{ingredient}</li>
                         ))}
                     </ul>
 
@@ -50,7 +52,7 @@ function RecipeDetails() {
 
                     <ol className="instructions-list">
                         {recipe.instructions.map((instruction) => (
-                            <li key={instruction}>{instruction}</li>
+                            <li>{instruction}</li>
                         ))}
                     </ol>
                 </div>
