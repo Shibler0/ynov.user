@@ -17,7 +17,7 @@ function UserDetails() {
     );
 
     if (!user) {
-        return <Navigate to="/*" />;
+        return <Navigate to="/404" />;
     }
 
     return (

@@ -10,7 +10,7 @@ import App from "./App.tsx";
 import RecipeDetails from "./pages/Recipe-details.tsx";
 import UserDetails from "./pages/User-details.tsx";
 import Connection from "./pages/Connection.tsx";
-import UserProfile from "./pages/userprofile.tsx";
+import Userprofile from "./pages/Userprofile.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const Layout = () => (
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/userprofile/:id",
-                element:<UserProfile/>
+                element:<Userprofile/>
             },
             {
                 path: "*",

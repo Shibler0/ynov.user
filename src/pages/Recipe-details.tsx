@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import recipeData from "../assets/recipes.json";
 import '../Recipe-details.css';
 
@@ -19,7 +19,7 @@ function RecipeDetails() {
     );
 
     if (!recipe) {
-        return <p>Recette introuvable</p>;
+        return <Navigate to="/404" />;
     }
 
     return (

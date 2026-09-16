@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import userData from "../assets/users.json";
 
 type ConnectedUser = {
@@ -7,7 +7,7 @@ type ConnectedUser = {
     lastName: string;
 };
 
-function UserProfile() {
+function Userprofile() {
     const { id } = useParams();
 
     const user = userData.users.find(
@@ -15,7 +15,7 @@ function UserProfile() {
     );
 
     if (!user) {
-        return <p>Utilisateur introuvable</p>;
+        return <Navigate to="/404" />;
     }
 
     return (
@@ -27,4 +27,4 @@ function UserProfile() {
     );
 }
 
-export default UserProfile;
+export default Userprofile;
