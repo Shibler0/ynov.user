@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import recipeData from "../assets/recipes.json";
-import '../recipe-details.css';
+import '../Recipe-details.css';
 
 type Recipe = {
     id: number;
@@ -24,8 +24,8 @@ function RecipeDetails() {
 
     return (
         <>
-            <button onClick={() => navigate(-1)}>
-                ⬅️ Retour
+            <button className="back-button" onClick={() => navigate(-1)}>
+                ⬅️
             </button>
 
             <h1>{recipe.name}</h1>
@@ -37,7 +37,7 @@ function RecipeDetails() {
                     alt={recipe.name}
                 />
 
-                <div>
+                <div className="recipe-info">
                     <h2>Ingrédients</h2>
 
                     <ul className="ingredients-list">
@@ -45,16 +45,16 @@ function RecipeDetails() {
                             <li key={ingredient}>{ingredient}</li>
                         ))}
                     </ul>
+
+                    <h2>Étapes</h2>
+
+                    <ol className="instructions-list">
+                        {recipe.instructions.map((instruction) => (
+                            <li key={instruction}>{instruction}</li>
+                        ))}
+                    </ol>
                 </div>
             </div>
-
-            <h2>Étapes</h2>
-
-            <ol className="instructions-list">
-                {recipe.instructions.map((instruction) => (
-                    <li key={instruction}>{instruction}</li>
-                ))}
-            </ol>
         </>
     );
 }

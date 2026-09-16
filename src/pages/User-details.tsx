@@ -22,8 +22,8 @@ function UserDetails() {
 
     return (
         <>
-            <button onClick={() => navigate(-1)}>
-                ⬅️ Retour
+            <button className="back-button" onClick={() => navigate(-1)}>
+                ⬅️
             </button>
 
             <div>

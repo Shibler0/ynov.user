@@ -1,13 +1,6 @@
-.recipe-image {
-    display: block;
-    margin: 0 auto;
-    width: 500px;
-    max-width: 100%;
-    border-radius: 20px;
-}
-
 .recipe-top {
     display: flex;
+    flex-direction: row;
     gap: 30px;
     align-items: flex-start;
 }
@@ -18,11 +11,17 @@
     border-radius: 20px;
 }
 
+.recipe-info {
+    flex: 1;
+}
+
 .ingredients-list {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 15px;
+
+    column-gap: 12px;
+    row-gap: 4px;
 
     list-style: none;
     padding: 0;
@@ -31,4 +30,16 @@
 .instructions-list {
     list-style: none;
     padding: 0;
+}
+
+.back-button {
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+
+    background: none;
+    border: none;
+
+    font-size: 32px;
+    cursor: pointer;
 }
