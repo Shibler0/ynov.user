@@ -1,16 +1,11 @@
 import './App.css'
-import recipeData from "./assets/recipes.json";
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+import type {RootState} from "./stores/store.ts";
 
-type RecipeThumbnail = {
-    id : number;
-    name: string;
-    prepTimeMinutes: number;
-    image: string;
-};
 
 function App() {
-    const recipes: RecipeThumbnail[] = recipeData.recipes;
+    const recipes = useSelector((state : RootState)=> state.recipesThumbnail.recipes)
 
     return (
         <>

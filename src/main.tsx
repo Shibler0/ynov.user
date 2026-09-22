@@ -12,6 +12,35 @@ import UserDetails from "./pages/User-details.tsx";
 import Connection from "./pages/Connection.tsx";
 import Userprofile from "./pages/Userprofile.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import {Provider} from "react-redux";
+import {store} from "./stores/store.ts";
+import axios from "axios";
+import {type RecipeThumbnail, setRecipesThumbnail, setUsers} from "./stores/reducers/users.ts";
+import type User from "./types/user.ts";
+
+interface UsersResponse {
+    users: User[];
+}
+
+interface RecipesThumbnailResponse {
+    recipesThumbnail: RecipeThumbnail[];
+}
+
+const getUsers = async () => {
+    const url = "https://dummyjson.com/users";
+    const response = await axios.get<UsersResponse>(url);
+    store.dispatch(setUsers(response.data.users));
+}
+
+getUsers();
+
+const getRecipesThumbnail = async () => {
+    const url = "https://dummyjson.com/recipes";
+    const response = await axios.get<RecipesThumbnailResponse>(url);
+    store.dispatch(setRecipesThumbnail(response.data.recipesThumbnail))
+}
+
+getRecipesThumbnail();
 
 const Layout = () => (
     <>
@@ -62,5 +91,7 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')!).render(
-  <RouterProvider router={router}/>
+    <Provider store={store}>
+        <RouterProvider router={router}/>
+    </Provider>
 )

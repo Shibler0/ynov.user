@@ -1,7 +1,8 @@
 import { Navigate, useParams } from "react-router-dom";
-import recipeData from "../assets/recipes.json";
 import '../Recipe-details.css';
 import BackButton from "../components/BackButton";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 type Recipe = {
     id: number;
@@ -15,10 +16,19 @@ function RecipeDetails() {
     const { id } = useParams();
 
     const recipeId = Number(id);
+    const [recipe, setRecipe] = useState<Recipe>();
+    const url = `https://dummyjson.com/recipe/${recipeId}`;
 
-    const recipe = recipeData.recipes.find(
-        (recipe: Recipe) => recipe.id === recipeId
-    );
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.get<Recipe>(url);
+                setRecipe(response.data);
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    }, []);
 
     if (!recipe) {
         return <Navigate to="/404" />;

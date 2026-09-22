@@ -1,25 +1,33 @@
-import { useParams } from "react-router-dom";
-import userData from "../assets/users.json";
-import { Navigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import BackButton from "../components/BackButton.tsx";
-
-type RestrainedUser = {
-    id: number,
-    username: string;
-    image: string;
-};
+import {useEffect, useState} from "react";
+import type User from "../types/user.ts";
+import axios from "axios";
 
 function UserDetails() {
     const { id } = useParams();
 
     const userId = Number(id);
 
-    const user = userData.users.find(
-        (user: RestrainedUser) => user.id === userId
-    );
+    const url = `https://dummyjson.com/users/${userId}`;
+    const navigate = useNavigate();
+
+    const [user, setUser] = useState<User>();
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.get<User>(url);
+                setUser(response.data);
+            } catch (e) {
+                console.error(e);
+                navigate("/404");
+            }
+        })();
+    }, []);
 
     if (!user) {
-        return <Navigate to="/404" />;
+        return null;
     }
 
     return (
