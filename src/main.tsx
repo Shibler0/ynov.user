@@ -8,7 +8,7 @@ import axios from "axios";
 import {type RecipeThumbnail, setRecipesThumbnail, setUsers} from "./stores/reducers/users.ts";
 import type User from "./types/user.ts";
 import {setLoggedUser} from "./stores/reducers/auth.ts";
-import {routes} from "./routes/route.tsx";
+import routes from "./routes/route.tsx";
 
 interface UsersResponse {
     users: User[];

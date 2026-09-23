@@ -1,4 +1,3 @@
-import type {RouteObject} from "react-router";
 import App from "../App.tsx";
 import Connection from "../pages/Connection.tsx";
 import NotFound from "../pages/NotFound.tsx";
@@ -10,7 +9,7 @@ import Userprofile from "../pages/Userprofile.tsx";
 import GuestRoute from "./GuestRoute.tsx";
 import Layout from "./Layout.tsx";
 
-export const routes: RouteObject[] = [
+const routes = [
     {
         element: <Layout/>,
         children: [
@@ -53,3 +52,6 @@ export const routes: RouteObject[] = [
         ],
     },
 ];
+
+
+export default routes;
