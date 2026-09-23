@@ -1,9 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {recipeSlice, userSlice} from "./reducers/users.ts";
+import authReducer from "./reducers/auth.ts";
 
 export const store = configureStore({
     reducer: {
         user: userSlice.reducer,
+        auth: authReducer,
         recipesThumbnail : recipeSlice.reducer
     }
 })

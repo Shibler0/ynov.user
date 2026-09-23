@@ -17,14 +17,45 @@ import {store} from "./stores/store.ts";
 import axios from "axios";
 import {type RecipeThumbnail, setRecipesThumbnail, setUsers} from "./stores/reducers/users.ts";
 import type User from "./types/user.ts";
+import {setLoggedUser} from "./stores/reducers/auth.ts";
 
 interface UsersResponse {
     users: User[];
 }
 
 interface RecipesThumbnailResponse {
-    recipesThumbnail: RecipeThumbnail[];
+    recipes: RecipeThumbnail[];
+    total: number;
+    skip: number;
+    limit: number;
 }
+
+const getLoggedUser = async () => {
+    try {
+        const url = "https://dummyjson.com/auth/me";
+        const response = await axios.get(url, {
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+        store.dispatch(setLoggedUser(response.data));
+    } catch (e) {
+        localStorage.removeItem('token');
+        store.dispatch(setLoggedUser(null));
+    }
+}
+
+const getRecipesThumbnail = async () => {
+    const url =
+        "https://dummyjson.com/recipes?select=id,name,prepTimeMinutes,image";
+
+    const response = await axios.get<RecipesThumbnailResponse>(url);
+
+    store.dispatch(setRecipesThumbnail(response.data.recipes));
+};
+
+getRecipesThumbnail();
 
 const getUsers = async () => {
     const url = "https://dummyjson.com/users";
@@ -34,13 +65,7 @@ const getUsers = async () => {
 
 getUsers();
 
-const getRecipesThumbnail = async () => {
-    const url = "https://dummyjson.com/recipes";
-    const response = await axios.get<RecipesThumbnailResponse>(url);
-    store.dispatch(setRecipesThumbnail(response.data.recipesThumbnail))
-}
-
-getRecipesThumbnail();
+Promise.all([getUsers(), getLoggedUser()])
 
 const Layout = () => (
     <>
@@ -49,46 +74,7 @@ const Layout = () => (
     </>
 )
 
-const router = createBrowserRouter([
-    {
-        element: <Layout/>,
-        children: [
-            {
-                path: '/',
-                element: <App/>,
-            },
-            {
-                path: "/userlist",
-                element: <UserList/>,
-            },
-            {
-                path: "/user/:username",
-                element:<Username/>
-            },
-            {
-                path: "/recipedetails/:id",
-                element:<RecipeDetails/>
-            },
-            {
-                path: "/userdetails/:id",
-                element:<UserDetails/>
-            },
-            {
-                path: "/login",
-                element:<Connection/>
-            },
-            {
-                path: "/userprofile/:id",
-                element:<Userprofile/>
-            },
-            {
-                path: "*",
-                element: <NotFound/>
-            }
-        ]
-    }
-
-]);
+const router = createBrowserRouter(routes);
 
 createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
