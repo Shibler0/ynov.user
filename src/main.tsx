@@ -2,22 +2,13 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter } from "react-router"
 import { RouterProvider } from "react-router/dom"
 import './index.css'
-import UserList from "./pages/UserList.tsx";
-import Username from "./pages/Username.tsx";
-import Header from "./components/Header.tsx";
-import {Outlet} from "react-router";
-import App from "./App.tsx";
-import RecipeDetails from "./pages/Recipe-details.tsx";
-import UserDetails from "./pages/User-details.tsx";
-import Connection from "./pages/Connection.tsx";
-import Userprofile from "./pages/Userprofile.tsx";
-import NotFound from "./pages/NotFound.tsx";
 import {Provider} from "react-redux";
 import {store} from "./stores/store.ts";
 import axios from "axios";
 import {type RecipeThumbnail, setRecipesThumbnail, setUsers} from "./stores/reducers/users.ts";
 import type User from "./types/user.ts";
 import {setLoggedUser} from "./stores/reducers/auth.ts";
+import {routes} from "./routes/route.tsx";
 
 interface UsersResponse {
     users: User[];
@@ -66,13 +57,6 @@ const getUsers = async () => {
 getUsers();
 
 Promise.all([getUsers(), getLoggedUser()])
-
-const Layout = () => (
-    <>
-        <Header/>
-        <Outlet/>
-    </>
-)
 
 const router = createBrowserRouter(routes);
 
